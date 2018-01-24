@@ -1,0 +1,36 @@
+.image-banner{
+	
+}
+.container{
+}
+.csAffiliateDesc{
+	background:orange;
+  
+}
+.col-md-10	{
+	background:antiquewhite;
+	padding:8px;  
+}
+.csProductTitle{
+	padding-top:10px;
+	min-height:50px;
+	font-size:12px;
+	line-height:normal;
+	
+}
+.clsProduct Img{
+	background:white;
+	-moz-border-radius:8px;
+	padding:15px;
+}
+.clsProductImg img
+{
+	display: block;		
+    margin-left: auto;
+    margin-right: auto;
+    width: 128px;
+	height:auto;		
+}
+.clsProductUrl {
+	margin-left: 38px;
+}
