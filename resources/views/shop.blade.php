@@ -9,10 +9,10 @@
 				<div class="csproduct">
 					<div class="col-md-3 cs-products">
 						<div class="clsProductImg">
-							<img src="../storage/app/images/noImage.png" alt="{{ $shopAffiliateProudct->title }}">
+							<img src="{{ $shopAffiliateProudct->product_image_url }}" alt="{{ $shopAffiliateProudct->product_title }}">
 						</div>
 						<div class="csProductTitle">
-							{{ $shopAffiliateProudct->title }}
+							{{ $shopAffiliateProudct->product_title }}
 						</div>
 						<div class="col-xs-8 clsProductUrl">
 							<a href="{{ $shopAffiliateProudct->product_url }}" class="btn btn-warning">Shop Now</a>

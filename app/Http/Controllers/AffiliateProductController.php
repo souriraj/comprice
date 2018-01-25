@@ -151,9 +151,9 @@ class AffiliateProductController extends Controller {
 	
 	public function callflipkartCategoriesUrl(){
 		$AffiliateFlipkartCateoryUrl = new AffiliateFlipkartCateoryUrl();		
-		$getAffiliateFlipkartCateoryUrls = $AffiliateFlipkartCateoryUrl::where('is_active', true)->get();
-		foreach($getAffiliateFlipkartCateoryUrls as $getAffiliateFlipkartCateoryUrl){
-			$products = $this->getFlipkartProducts($getAffiliateFlipkartCateoryUrl->category_url);			
+		$getAffiliateFlipkartCateoryUrls = $AffiliateFlipkartCateoryUrl::where('is_active', true)->where('cron_status', "not_started")->orderBy('id', 'DESC')->first();
+		if($getAffiliateFlipkartCateoryUrls){
+			$products = $this->getFlipkartProducts($getAffiliateFlipkartCateoryUrls->category_url);			
 		}
 		
 	}	
@@ -173,8 +173,9 @@ class AffiliateProductController extends Controller {
 	        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 	        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 	        $result = curl_exec($ch);
-	        curl_close($ch);
+	        curl_close($ch);			
 			$data = json_decode($result, true);	
+
 			foreach($data['productInfoList'] as $flipkartproduct){
 				if($this->checkExistingFlipkartProduct($flipkartproduct['productBaseInfo']['productIdentifier']['productId'])){
 					$existingProduct = FlipkartProduct::where('flipkart_product_id', $flipkartproduct['productBaseInfo']['productIdentifier']['productId'])->first();							
@@ -202,7 +203,6 @@ class AffiliateProductController extends Controller {
 					$flipkart->selling_price_currency = $flipkartproduct['productBaseInfo']['productAttributes']['sellingPrice']['currency'];
 					$flipkart->brand_id = $this->findOrCreateBrand($flipkartproduct['productBaseInfo']['productAttributes']['productBrand']);
 					$flipkart->discount_percentage = $flipkartproduct['productBaseInfo']['productAttributes']['discountPercentage'];				
-					print_r($flipkart);exit;
 					$flipkart->save();
 				}			
 			}	
