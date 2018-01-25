@@ -1,5 +1,5 @@
 <?php namespace App\Http\Controllers;
-use App\Models\AffiliateProduct;
+use App\Models\FlipkartProduct;
 
 class ShopController extends Controller {
 
@@ -31,8 +31,8 @@ class ShopController extends Controller {
 	 */
 	public function index()
 	{
-		$affiliateProducts = new AffiliateProduct();
-		$shopaffiliateProducts = $affiliateProducts::where('is_published', true)->get();
+		$affiliateProducts = new FlipkartProduct();
+		$shopaffiliateProducts = $affiliateProducts::where('is_published', false)->paginate(12);
 		return view('shop', ['shopAffiliateProudcts' => $shopaffiliateProducts]);
 	}
 
